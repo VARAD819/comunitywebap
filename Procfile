@@ -1,0 +1,1 @@
+web: gunicorn comunitywebap.wsgi --log-file
