@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Interests, CustomUser
-from .serializers import InterestSerializer, ProfileSerializer, UserSerializer 
+from .models import Interests
+from .serializers import InterestSerializer, LoginSerializer, ProfileSerializer, UserSerializer 
 from django.contrib.auth.models import User
-from rest_framework.authtoken.models import Token
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -28,6 +28,10 @@ class RegisterUser(APIView):
         'refresh': str(refresh), 
         'access': str(refresh.access_token) 
         })
+
+
+class LoginUser(TokenObtainPairView):
+    serializer_class = LoginSerializer
 
 
 class Interest(APIView):
