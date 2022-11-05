@@ -90,7 +90,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
-'''
+
 CORS_ALLOWED_ORIGINS = ['*',]
 
 CSRF_TRUSTED_ORIGINS = ['*',]
@@ -98,7 +98,7 @@ CSRF_TRUSTED_ORIGINS = ['*',]
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = ('http://localhost:3000','*',)
-'''
+
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
