@@ -57,7 +57,31 @@ class Interest(APIView):
 
 
 class Profile(APIView):
+    def get_object(self,pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            return Response({
+                'message':'User does not exist or Invalud ID'
+            })
+
     def get(self, request):
         profile_set = User.objects.all()
         serializer = ProfileSerializer(profile_set, many=True)
         return Response(serializer.data)
+
+    def patch(self, request, pk):
+        profile = self.get_object(pk)
+        data = request.data
+        serializer = ProfileSerializer(profile, data=data, partial=True)
+        
+        if not serializer.is_valid():
+            return Response({
+                'error':serializer.errors
+            })
+
+        serializer.save()
+        return Response({
+            'payload':serializer.data,   
+            'message':'User Updated'
+        })

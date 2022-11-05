@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,7 +36,8 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 INSTALLED_APPS = [
     'accounts',
     'products',
-    
+    'community',
+
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
@@ -88,7 +90,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
-
+'''
 CORS_ALLOWED_ORIGINS = ['*',]
 
 CSRF_TRUSTED_ORIGINS = ['*',]
@@ -96,7 +98,7 @@ CSRF_TRUSTED_ORIGINS = ['*',]
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = ('http://localhost:3000','*',)
-
+'''
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -146,8 +148,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

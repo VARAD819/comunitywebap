@@ -1,4 +1,3 @@
-from dataclasses import fields
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import *
@@ -27,7 +26,8 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create(email = validated_data['email'], 
                                    name = validated_data['name'], 
                                    mobile = validated_data['mobile'],
-                                   DOB = validated_data['DOB'])
+                                   DOB = validated_data['DOB'],
+                                   )
         user.set_password(validated_data['password'])
         user.save()
         return user
@@ -37,7 +37,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     DOB = serializers.DateField(format="%d-%m-%Y", input_formats=['%d-%m-%Y'])
     class Meta:
         model = User
-        exclude = ['user','id']
+        fields = ['email', 'mobile', 'name', 'DOB','profilepic']
 
 
 class InterestSerializer(serializers.ModelSerializer):
