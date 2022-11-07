@@ -13,6 +13,7 @@ class LoginSerializer(TokenObtainPairSerializer):
         data['name'] = self.user.name
         data['email'] = self.user.email
         data['mobile'] = self.user.mobile
+        data['superuser'] = self.user.is_staff
         return data
 
 
