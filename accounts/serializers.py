@@ -20,7 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
     DOB = serializers.DateField(format="%d-%m-%Y", input_formats=['%d-%m-%Y'])
     class Meta:
         model = User
-        fields = ['email', 'password', 'mobile', 'name', 'DOB']
+        fields = ['email', 'password', 'mobile', 'name', 'DOB', 'is_staff']
 
     def create(self, validated_data):
         user = User.objects.create(email = validated_data['email'], 
@@ -37,7 +37,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     DOB = serializers.DateField(format="%d-%m-%Y", input_formats=['%d-%m-%Y'])
     class Meta:
         model = User
-        fields = ['email', 'mobile', 'name', 'DOB','profilepic','is_staff']
+        fields = ['email', 'mobile', 'name', 'DOB', 'profilepic', 'is_staff']
         
 
 class InterestSerializer(serializers.ModelSerializer):
