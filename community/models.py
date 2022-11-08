@@ -1,5 +1,3 @@
-import PIL
-from PIL import Image
 import uuid
 from uuid import uuid4
 from django.db import models

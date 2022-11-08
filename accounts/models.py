@@ -4,8 +4,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser 
 from django.contrib.auth import models as auth_models
 from .manager import UserManager
-import PIL
-from PIL import Image
 
 # Create your models here.
 
