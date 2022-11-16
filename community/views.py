@@ -363,3 +363,22 @@ class ChannelApprove(APIView):
                 'message':'Only community admins are allowed to approve Channels',
             },
             status=status.HTTP_400_BAD_REQUEST)
+
+
+class CommunityChannels(APIView):
+
+    #getting specific community    
+    def get_object(self, pk):
+        try:
+            return Community.objects.get(pk=pk)
+        except Community.DoesNotExist:
+            return Response({
+                'message':'Invalid ID'
+            })
+
+    #read
+    def get(self, request, pk):
+        community_object = self.get_object(pk)
+        channel_set = Channels.objects.filter(community=community_object)
+        serializer = ChannelSerializer(channel_set, many=True)
+        return Response(serializer.data)
