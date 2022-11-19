@@ -10,7 +10,7 @@ from .manager import UserManager
 
 class CustomUser(auth_models.AbstractUser):
     def nameFile(instance, filename):
-        return '/'.join(['userimages',str(instance.name), filename])
+        return '/'.join(['userimages',str(instance.name).replace(" ",""), filename])
 
     username = None
     email = models.EmailField(unique=True, primary_key=True)

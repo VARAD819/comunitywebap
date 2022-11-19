@@ -8,7 +8,7 @@ from accounts.models import CustomUser
 
 class Community(models.Model):
     def nameFile(instance, filename):
-        return '/'.join(['images',str(instance.community_name), filename])
+        return '/'.join(['images',str(instance.community_name).replace(" ",""), filename])
 
     community_admin = models.ForeignKey(
         CustomUser, 
