@@ -12,4 +12,5 @@ path('channels/users/<str:pk>',ChannelUserCRUD.as_view()),
 path('approve/<str:pk>',CommunityApprove.as_view()),
 path('channels/approve/<str:pk>',ChannelApprove.as_view()),
 path('channels/community/<str:pk>',CommunityChannels.as_view()),
+path('channels/chats/<str:pk>',ChatChannels.as_view()),
 ]

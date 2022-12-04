@@ -41,3 +41,15 @@ class ChannelApproveSerializer(serializers.ModelSerializer):
         model = Channels
         fields = ['approved']
 
+
+class ChatSerializer(serializers.ModelSerializer):
+    user_name = serializers.SerializerMethodField('get_username')
+
+    def get_username(self, chat_object):
+        useremail = getattr(chat_object, "user_email")
+        username = CustomUser.objects.get(email=useremail).name
+        return username
+
+    class Meta:
+        model = Chats
+        fields = ['message','channel','user_email','user_name','time']

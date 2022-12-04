@@ -382,3 +382,40 @@ class CommunityChannels(APIView):
         channel_set = Channels.objects.filter(community=community_object)
         serializer = ChannelSerializer(channel_set, many=True)
         return Response(serializer.data)
+
+
+#chat save
+class ChatChannels(APIView):
+
+    #getting specific channel    
+    def get_object(self, pk):
+        try:
+            return Channels.objects.get(pk=pk)
+        except Channels.DoesNotExist:
+            return Response({
+                'message':'Invalid ID'
+            })
+
+    #read
+    def get(self, request, pk):
+        channel_object = self.get_object(pk)
+        chat = Chats.objects.filter(channel=channel_object)
+        serializer = ChatSerializer(chat, many=True)
+        return Response(serializer.data)
+
+    #chatinsert
+    def post(self,request,pk):
+        data=request.data        
+        serializer = ChatSerializer(data=data)
+
+        if not serializer.is_valid():
+            return Response({
+                'errors':serializer.errors,
+                'message':'Invalid Input, send proper data'
+            })
+
+        serializer.save()
+        return Response({
+            'payload':serializer.data,
+            'message':'Chat Saved successfully'
+        })
